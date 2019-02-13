@@ -3,7 +3,7 @@
 $hostname = 'localhost';
 $dbname = 'site_multimedia';
 $username = 'root'; 
-$password = '1234512345';
+$password = 'root';
 
 try 
 {
