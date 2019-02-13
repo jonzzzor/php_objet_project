@@ -1,5 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?php
+    session_start();
+    try {
+        //Connexion à la base de données
+        include('../php/connexion.php');
+    } catch (Exception $exeption) {
+        //En cas d'erreur, afficher le message d'erreur
+        sprintf("Erreur de connexion : %s<br/>\n", $exeption->getMessage());
+    }
+?>
+
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
 
 <head>
@@ -16,7 +27,17 @@
 </head>
 
 <body>
+
+    <!-- Navbar -->
     <nav class="navbar navbar-light bg-light">
+        <?php
+        $bonjour = $_SESSION['nom'] ?? 'invité';
+        echo 'Bonjour '.$bonjour.'     ';
+        // var_dump($_SESSION['control']);
+        if (isset($_SESSION['control']) && !$_SESSION['control']) {
+            echo 'Champs de saisie incorrect, veuillez recommencer.';
+        }
+        ?>
         <form action="../php/analyse_form_connexion.php" class="form-inline ml-auto" method="POST">
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -32,6 +53,7 @@
             </div>
 
             <input class="btn btn-primary" type="submit" value="Submit">
+            <a href='../php/logout.php' class="btn btn-outline-danger">Sign out</a>
 
         </form>
     </nav>
