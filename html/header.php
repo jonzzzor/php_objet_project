@@ -57,3 +57,14 @@
 
         </form>
     </nav>
+
+
+    <div class="container">
+      <div class="row">
+        <!-- Informations entrantes-->
+        <div class="col-md-6">
+            <a href='../php/form_depot.php'>Ajouter medias</a>
+
+        </div>
+     </div>
+   </div>
