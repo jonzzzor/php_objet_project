@@ -33,5 +33,38 @@ echo "<form method='get' action='#'>
     </form>";
 
 if (isset($_GET['etape']) && $_GET['etape'] === '2') {
-    rechercheDocument($autor, $desc, $audioSelected, $videoSelected, $imageSelected);
+
+    $resultRecherche = rechercheDocument($autor, $desc, $audioSelected, $videoSelected, $imageSelected);
+    //echo '<pre>'; print_r($resultRecherche); echo '</pre>';
+    
+    $numberRows = count($resultRecherche);
+    if ($numberRows == 1) {
+        echo '<pre>'; print_r($resultRecherche); echo '</pre>';
+    }
+    else {
+        echo "<form>";
+        for ($i=0; $i<$numberRows; $i++) {
+            $tempArray = $resultRecherche[$i];
+            $tempNomAuteur = $tempArray['nom'];
+            $tempDescription = $tempArray['description'];
+            echo "<div>
+
+            <input type='hidden' name='etape' value='3'>
+
+            <input type='radio' id='radioresult'.$i name='drone' value='chemin relatif à écrire' checked>
+            <label for='huey'>Nom de l'auteur : $tempNomAuteur <br> Description sommaire : $tempDescription</label>
+            </div>";
+        }
+        
+        echo "<div>
+        <button type='submit'>Envoyer</button>
+        </div>
+        </form>";
+    }
+}
+
+//etape 3
+
+if (isset($_GET['etape']) && $_GET['etape'] === '3') {
+
 }

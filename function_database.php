@@ -61,17 +61,26 @@ require_once("connexion_database.php");
                             ");
      $result->execute(array($nomRecherche, $description));
 
-
+     $resultArray = array();
      //TRAITEMENT DE LA REQUETE
      if ($result != false) {
-         while ($row = $result->fetch()) {
-             echo "<br>Id : " . $row['idData']."<br>";
+            while ($row = $result->fetch()) {
+            array_push($resultArray, $row);
+            
+            
+            /*
+            $tempArray = array();
+             $tempArray['idData']=$row['idData'];
+            $tempArray['chemin_relatif']=$row['chemin_relatif'];
+            
              echo "<br>Chemin relatif : " . $row['chemin_relatif']."<br>";
              echo "<br>Mime-type : " . $row['mime_type']."<br>";
              echo "<br>Description : " . $row['description']."<br>";
              echo "<br>Date : " . $row['date']."<br>";
              echo "<br> Nom de l'utilisateur : " .$row['nom']."<br>";
              echo "<br/>";
+             */
          }
      }
+     return $resultArray;
  }
