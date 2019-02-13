@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('./connexion.php');
+require_once('./connexion.php');
 
 $grainDeSel = "pFXOmRFNO5FQw1nbrGFC";
 $user = htmlspecialchars($_POST['nom']) ?? '';
