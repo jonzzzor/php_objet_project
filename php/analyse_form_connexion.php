@@ -36,8 +36,6 @@ function checkUser($user, $pwd, $dbh, $table_users)
     }
 }
 
-
-
 function userConnect($dbh, $pwd, $user, $table_users)
 {
     $query = $dbh->prepare("SELECT ? FROM $table_users WHERE nom=?");
