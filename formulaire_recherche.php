@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once("connexion_database.php");
 require_once("function_database.php");
 
@@ -37,21 +39,26 @@ if (isset($_GET['etape']) && $_GET['etape'] === '2') {
     $resultRecherche = rechercheDocument($autor, $desc, $audioSelected, $videoSelected, $imageSelected);
     //echo '<pre>'; print_r($resultRecherche); echo '</pre>';
     
+$_SESSION['resultatRecherche']=$resultRecherche;
+
     $numberRows = count($resultRecherche);
     if ($numberRows == 1) {
-        echo '<pre>'; print_r($resultRecherche); echo '</pre>';
-    }
+        //echo '<pre>'; print_r($resultRecherche); echo '</pre>';
+        goto etape3 ;
+        }
     else {
-        echo "<form>";
+        //echo '<pre>'; print_r($resultRecherche); echo '</pre>';
+                echo "<form method='get' action='#'>";
         for ($i=0; $i<$numberRows; $i++) {
             $tempArray = $resultRecherche[$i];
             $tempNomAuteur = $tempArray['nom'];
             $tempDescription = $tempArray['description'];
+            $tempIdData = $tempArray['idData'];
             echo "<div>
 
             <input type='hidden' name='etape' value='3'>
 
-            <input type='radio' id='radioresult'.$i name='drone' value='chemin relatif à écrire' checked>
+            <input type='radio' id='radioresult'.$i name='idData' value=$tempIdData>
             <label for='huey'>Nom de l'auteur : $tempNomAuteur <br> Description sommaire : $tempDescription</label>
             </div>";
         }
@@ -66,5 +73,44 @@ if (isset($_GET['etape']) && $_GET['etape'] === '2') {
 //etape 3
 
 if (isset($_GET['etape']) && $_GET['etape'] === '3') {
+    etape3:
+    $idData=$_GET['idData'] ?? '';
+    if (count($_SESSION['resultatRecherche'])==1) {
+        $idData=$_SESSION['resultatRecherche'][0]['idData'];
+    }
+        //echo 'Notre résultat est '.$idData;
+    //echo '<pre>'; print_r($_SESSION['resultatRecherche']); echo '</pre>';
 
+
+    foreach ($_SESSION['resultatRecherche'] as $document) {
+        if ($idData === $document['idData'] ){
+            //echo '<pre>'; print_r($document); echo '</pre>';
+            $mime_type=$document['mime_type'];
+            preg_match('/(.+)\/(.+)$/i', $mime_type, $reg);
+            $documentLocation = './application/multimedia/'.$reg[1].'/'.$document['chemin_relatif'];
+            //echo '<pre>'; print_r($reg); echo '</pre>';
+            switch ($reg[1]) {
+                    case 'image': echo "<img src='$documentLocation' alt='Image sélectionnée' />";
+                    break;
+                    case 'audio': echo "<audio controls='controls'>
+                            <source src=$documentLocation type=$mime_type />
+                            Votre navigateur ne supporte pas le lecteur audio.
+                          </audio>";
+                    break;
+                    case 'video': echo "<video controls width='1000'>
+                            <source src=$documentLocation type=$mime_type>                        
+                            Votre navigateur ne supporte pas le lecteur vidéo.
+                        </video>";
+                    break;
+                    default: echo 'erreur format inconnu';
+                }
+//recherche troncage texte <script type="text/javascript"> function MaxLengthTextarea(objettextarea,maxlength){  if (objettextarea.value.length > maxlength) {    objettextarea.value = objettextarea.value.substring(0, maxlength);    alert('Votre texte ne doit pas dépasser '+maxlength+' caractères!');   }}</script>
+$description=$document['description'];
+echo "<p><legend>$description</legend></p>";
+
+        }
+        // foreach ($document as $key => $value) {
+            
+       // }
+    }
 }
