@@ -49,7 +49,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Password</span>
                 </div>
-                <input type="text" class="form-control" placeholder="password" name="passwd" aria-describedby="basic-addon1">
+                <input type="password" class="form-control" placeholder="password" name="passwd" aria-describedby="basic-addon1">
             </div>
 
             <input class="btn btn-primary" type="submit" value="Submit">
