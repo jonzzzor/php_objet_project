@@ -6,8 +6,8 @@ class Session {
    private $user_passwd;
  
    private function __construct($user_id,$user_nom,$user_passwd) {
-     echo "<p>création de l'instance de Session ".$user_nom." / ".$user_passwd."</p>\n";
-     $this->$user_id = $user_id;
+     echo "<p>création de l'instance de Session  id: ". $user_id. " // nom: ".$user_nom." // passwd: ".$user_passwd."</p>\n";
+     $this->user_id = $user_id;
      $this->user_nom = $user_nom;
      $this->user_passwd = $user_passwd;
    }
