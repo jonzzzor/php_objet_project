@@ -5,7 +5,7 @@ class Connexion
     private $host = 'localhost';
     private $dbname = 'site_multimedia';
     private $user = 'root';
-    private $mdp = 'root';
+    private $mdp = '1234512345';
     private static $instance_db;
     private $dbh;
 
@@ -24,7 +24,7 @@ class Connexion
         return self::$instance_db;
     }
 
-    public function connectToDb()
+    private function connectToDb()
     {
         $this->dbh = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname, $this->user, $this->mdp); // connexion
         $this->dbh->exec("SET NAMES 'UTF-8MB4'");      // config du charset
