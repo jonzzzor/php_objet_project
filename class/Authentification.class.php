@@ -3,8 +3,7 @@ require_once('Session.class.php');
 require_once('Connexion.class.php');
 class Authentification
 {
-    private static $instance;
-    protected $db;
+    private static $instance; 
 
     private function __construct()
     {
@@ -19,32 +18,14 @@ class Authentification
     public static function getInstance()
     {
         if (!self::$instance) {
-            self::$instance = new self();
-            self::$instance->connexionDB();
+            self::$instance = new self(); 
         }
         // echo "<p>appel de l'instance d'authentification</p>\n";
 
         return self::$instance;
     }
 
-    public function connexionDB()
-    {
-        $hostname = 'localhost';
-        $dbname = 'site_multimedia';
-        $username = 'root';
-        $password = 'root';
-
-        try {
-            /*** echo a message saying we have connected ***/
-            $this->db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-            echo 'Connected to database <br><br>';
-
-            $this->db->exec("SET NAMES 'UTF-8'");      // config du charset
-            var_dump($this->db);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
+ 
 
 
     public function checkUser($user, $pass)
