@@ -1,5 +1,6 @@
 <?php
-
+require_once('Session.class.php');
+require_once('Connexion.class.php');
 class Authentification
 {
     private static $instance;
@@ -48,7 +49,8 @@ class Authentification
 
     public function checkUser($user, $pass)
     {
-        $query = $this->db->prepare("SELECT users.id FROM users WHERE users.nom=? AND users.passwd=?");
+        $db = Connexion::getInstance()->getDb();
+        $query = $db->prepare("SELECT users.id FROM users WHERE users.nom=? AND users.passwd=?");
         // On vérifie le mot de passe ET le login.
         // Penser à rajouter le HASHING http://php.net/manual/fr/function.md5.php
         $query->execute(array($user, $pass));
