@@ -17,7 +17,8 @@ class FormulaireRechercheRadioButton
         }
         
         
-        echo "<form method='get' action='#'>";
+        echo "<form method='get' action='#'>
+                <input type='hidden' name='etape' value='3'>";
             for ($i=0; $i<$countResult; $i++) {
                 $tempArray = $resultRecherche[$i];
                 $tempNomAuteur = $tempArray['nom'];
@@ -25,10 +26,9 @@ class FormulaireRechercheRadioButton
                 $tempIdData = $tempArray['idData'];
                 $tempTypeMime = $tempArray['mime_type'];
                 echo "
-                <div>
-                    <input type='hidden' name='etape' value='3'>
+                <div> 
                     <input type='radio' id='radioresult'.$i name='idData' value=$tempIdData>
-                    <label for='huey'>[Auteur : $tempNomAuteur] / [Description : $tempDescription] / [Type : $tempTypeMime]</label>
+                    <label for='radioresult'>[Auteur : $tempNomAuteur] / [Description : $tempDescription] / [Type : $tempTypeMime]</label>
                 </div>";
             }
 
@@ -38,6 +38,16 @@ class FormulaireRechercheRadioButton
             </div>
         </form>";
 
+    }
+    
+     public function getResponse()
+    {
+        $array = array();
+        if(isset($_GET['idData']) && isset($_GET['idData']))
+        { 
+            $array['idData'] = htmlspecialchars($_GET['idData'] ?? '');  
+        }
+        return $array;
     }
 
 }
