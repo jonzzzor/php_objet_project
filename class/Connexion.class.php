@@ -1,4 +1,5 @@
 <?php
+
 class Connexion
 {
     private $host = 'localhost';
