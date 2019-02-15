@@ -1,31 +1,30 @@
 <?php
-require_once('Session.class.php');
-require_once('Connexion.class.php');
+
 class Authentification
 {
-    private static $instance; 
+    private static $instance;
 
     private function __construct()
     {
-        echo "<p>création de l'instance d'authentification </p>\n";
+        // echo "<p>création de l'instance d'authentification </p>\n";
     }
 
     private function __destruct()
     {
-        echo "<p>destruction de l'instance d'authentification</p>\n";
+        // echo "<p>destruction de l'instance d'authentification</p>\n";
     }
 
     public static function getInstance()
     {
         if (!self::$instance) {
-            self::$instance = new self(); 
+            self::$instance = new self();
         }
         // echo "<p>appel de l'instance d'authentification</p>\n";
 
         return self::$instance;
     }
 
- 
+
 
 
     public function checkUser($user, $pass)
@@ -47,7 +46,11 @@ class Authentification
 
     public function isAuth()
     {
-       return $this->checkUser(Session::getInstance()->getUserNom(), Session::getInstance()->getUserPasswd());
+        if ($this->checkUser(Session::getInstance()->getUserNom(), Session::getInstance()->getUserPasswd())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function disconnect()
@@ -63,18 +66,18 @@ class Authentification
 }
 
 
-$resultat = Authentification::getInstance()->checkUser('jon', 'password1');
-echo "résultat de l'authentification : $resultat <br/>";
-echo "résultat de l'authentification avec isAuth : ".Authentification::getInstance()->isAuth()."<br/>";
-printf("id : %s<br/>\n", Session::getInstance()->getUserId());
-printf("nom : %s<br/>\n", Session::getInstance()->getUserNom());
-printf("password : %s<br/>\n", Session::getInstance()->getUserPasswd());
-
-Authentification::getInstance()->disconnect();
-echo "résultat de l'authentification avec isAuth apres déconnexion : ".Authentification::getInstance()->isAuth()."<br/>";
-printf("id : %s<br/>\n", Session::getInstance()->getUserId());
-printf("nom : %s<br/>\n", Session::getInstance()->getUserNom());
-printf("password : %s<br/>\n", Session::getInstance()->getUserPasswd());
+// $resultat = Authentification::getInstance()->checkUser('jon', 'password1');
+// echo "résultat de l'authentification : $resultat <br/>";
+// echo "résultat de l'authentification avec isAuth : ".Authentification::getInstance()->isAuth()."<br/>";
+// printf("id : %s<br/>\n", Session::getInstance()->getUserId());
+// printf("nom : %s<br/>\n", Session::getInstance()->getUserNom());
+// printf("password : %s<br/>\n", Session::getInstance()->getUserPasswd());
+//
+// Authentification::getInstance()->disconnect();
+// echo "résultat de l'authentification avec isAuth apres déconnexion : ".Authentification::getInstance()->isAuth()."<br/>";
+// printf("id : %s<br/>\n", Session::getInstance()->getUserId());
+// printf("nom : %s<br/>\n", Session::getInstance()->getUserNom());
+// printf("password : %s<br/>\n", Session::getInstance()->getUserPasswd());
 
 
 //Session::killInstance();

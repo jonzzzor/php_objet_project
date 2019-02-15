@@ -11,7 +11,7 @@ class Connexion
 
     private function __construct()
     {
-        echo '<br/>from constructeur : connexion à la base de donnée.<br/>';
+        // echo '<br/>from constructeur : connexion à la base de donnée.<br/>';
     }
 
     public static function getInstance()
@@ -20,7 +20,7 @@ class Connexion
             self::$instance_db = new self();
             self::$instance_db->connectToDb();
         }
-        echo '<br/>from getInstance : instanciation lancée.';
+        // echo '<br/>from getInstance : instanciation lancée.';
         return self::$instance_db;
     }
 

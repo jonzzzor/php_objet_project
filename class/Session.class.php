@@ -1,43 +1,53 @@
 <?php
-class Session {
-   private static $instance; 
-   private $user_id;
-   private $user_nom;
-   private $user_passwd;
- 
-   private function __construct($user_id,$user_nom,$user_passwd) {
-     echo "<p>création de l'instance de Session  id: ". $user_id. " // nom: ".$user_nom." // passwd: ".$user_passwd."</p>\n";
-     $this->user_id = $user_id;
-     $this->user_nom = $user_nom;
-     $this->user_passwd = $user_passwd;
-   }
- 
-   private function __destruct() {
-     echo "<p>destruction de l'instance de Session".$this->user_nom."</p>\n";
-   }
- 
-    static function getInstance($user_id = 'defaut_id', $user_nom = 'defaut_nom', $user_passwd = 'defaut_passwd') {
-     if (!self::$instance) self::$instance = new self($user_id,$user_nom,$user_passwd);
-    // echo "<p>appel de l'instance de Sessio ".self::$instance->user_nom." / ".self::$instance->user_passwd."</p>\n";
-     
-     return self::$instance;
-   }
+class Session
+{
+    private static $instance;
+    private $user_id;
+    private $user_nom;
+    private $user_passwd;
 
-  function getUserId() { 
-     return $this->user_id;
-   }
-    
-   function getUserNom() { 
-     return $this->user_nom;
-   }
-   
-    function getUserPasswd() {
-     return $this->user_passwd;
-   }
- 
-   static function killInstance() {
-     self::$instance = null;
-   }
+    private function __construct($user_id, $user_nom, $user_passwd)
+    {
+        // echo "<p>création de l'instance de Session  id: ". $user_id. " // nom: ".$user_nom." // passwd: ".$user_passwd."</p>\n";
+        $this->user_id = $user_id;
+        $this->user_nom = $user_nom;
+        $this->user_passwd = $user_passwd;
+    }
+
+    private function __destruct()
+    {
+        // echo "<p>destruction de l'instance de Session".$this->user_nom."</p>\n";
+    }
+
+    public static function getInstance($user_id = 'defaut_id', $user_nom = 'defaut_nom', $user_passwd = 'defaut_passwd')
+    {
+        if (!self::$instance) {
+            self::$instance = new self($user_id, $user_nom, $user_passwd);
+        }
+        // echo "<p>appel de l'instance de Sessio ".self::$instance->user_nom." / ".self::$instance->user_passwd."</p>\n";
+
+        return self::$instance;
+    }
+
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    public function getUserNom()
+    {
+        return $this->user_nom;
+    }
+
+    public function getUserPasswd()
+    {
+        return $this->user_passwd;
+    }
+
+    public static function killInstance()
+    {
+        self::$instance = null;
+    }
 }
 /*
 echo "<br/>Ligne1<br/>";
