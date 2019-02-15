@@ -4,9 +4,8 @@ class FormulaireAffichageDocument
 {
 
     
-  public function __construct() {
-      
-  }
+    public function __construct() {
+    }
 
 
     public function showForm($array_document)
@@ -37,9 +36,26 @@ class FormulaireAffichageDocument
                 break;
                 default: echo 'erreur format inconnu';
         }
-        //recherche troncage texte <script type="text/javascript"> function MaxLengthTextarea(objettextarea,maxlength){  if (objettextarea.value.length > maxlength) {    objettextarea.value = objettextarea.value.substring(0, maxlength);    alert('Votre texte ne doit pas dépasser '+maxlength+' caractères!');   }}</script> 
-        echo "<p><legend>$description</legend></p>";
+
+      
+
+        //Affichage de la description raccourcie + de ce qui permet de la déplier
+        if (strlen($description)>=10) {
+            echo "<summary>".self::shortenDescription($description)."...</summary>
+            <details>".$description."</details>";
+        }
+        else echo $description;
+
     }
+
+    //Création d'une fonction pour raccourcir la description à 6 mots
+    private function shortenDescription($description)
+                {
+                $description_array = explode(' ',$description);
+                if(count($description_array) > 6)
+                    $description = implode(' ',array_slice($description_array, 1, 6)).'...'; 
+                return $description;
+                }
 
 }
 

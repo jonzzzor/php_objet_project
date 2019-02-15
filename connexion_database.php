@@ -3,7 +3,7 @@
 $hostname = 'localhost';
 $dbname = 'site_multimedia';
 $username = 'root';
-$password = 'root';
+$password = '1234512345';
 
 try {
     /*** echo a message saying we have connected ***/
