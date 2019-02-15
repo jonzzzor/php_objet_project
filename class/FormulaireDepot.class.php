@@ -22,57 +22,55 @@ class FormulaireDepot
     public function getResponse()
     {
         $array = array();
-        if(isset($_GET['idData']) && isset($_GET['idData']))
-        { 
-            //$array['idData'] = htmlspecialchars($_GET['idData'] ?? '');  
-            $array['file_upload'] = $_FILES['file_upload'];
-            $array['description'] = htmlspecialchars($_POST['description'] ?? '');
-            
+        $send_file = htmlspecialchars($_POST['send_file'] ?? '');
+        if ($send_file == 'click') {
+            if(isset($_FILES['file_upload']) && $_FILES['file_upload']['name'] != ''){
+                $array['file_upload'] = $_FILES['file_upload'];
+            }else{
+                echo "FICHIER MANQUANT<br/>";
+                return false;
+            }
+            if(isset($_POST['description']) && $_POST['description'] != ''){
+                $array['description'] = htmlspecialchars($_POST['description'] ?? '');
+            }else{
+                echo "DESCRIPTION MANQUANTE<br/>";
+                
+            }
         }
         return $array;
     }
 
-    // Contrôle remplissage des champs
-private function control_remplissage_champ($champ)
-{
-    if ($champ !== '') {
-        echo "CONTROLE_REMPLISSAGE_CHAMP : ".$champ."<br/>";
-        return true;
-    } else {
-        echo "CONTROLE_REMPLISSAGE_CHAMP : champ vide<br/>";
-        return false;
-    }
-}
+    
 
-// Contrôle type de file
-private function control_type_file($file)
-{
-    if (preg_match('/(.+)\.(.+)$/i', $file['name'], $reg)) {
-        // var_dump($reg);
-        // echo("EXTENSION FICHIER : $reg[2]<br/>");
-        return strtolower($reg[2]);
+    // Contrôle type de file
+    private function control_type_file($file)
+    {
+         if (preg_match('/(.+)\.(.+)$/i', $file['name'], $reg)) {
+            // var_dump($reg);
+            // echo("EXTENSION FICHIER : $reg[2]<br/>");
+            return strtolower($reg[2]);
+        }
     }
-}
 
-// Répartition type de fichier
-private function check_type_extension($extension)
-{
-    switch ($extension) {
-        case 'webm': $rangement = 'video';
-        break;
-        case 'gif':
-        case 'jpeg':
-        case 'jpg':
-        case 'png':
-        case 'svg': $rangement = 'image';
-        break;
-        case 'ogg': $rangement = 'audio';
-        break;
-        default: $rangement = '';
+    // Répartition type de fichier
+    private function check_type_extension($extension)
+    {
+        switch ($extension) {
+            case 'webm': $rangement = 'video';
+            break;
+            case 'gif':
+            case 'jpeg':
+            case 'jpg':
+            case 'png':
+            case 'svg': $rangement = 'image';
+            break;
+            case 'ogg': $rangement = 'audio';
+            break;
+            default: $rangement = '';
+        }
+        // echo "RANGEMENT FILE DANS : $rangement<br/>";
+        return $rangement;
     }
-    // echo "RANGEMENT FILE DANS : $rangement<br/>";
-    return $rangement;
-}
     
      
 

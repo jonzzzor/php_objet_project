@@ -72,4 +72,27 @@ class DbSearch
         }
         return $resultArray;
     }
+
+    function write_table($result_tab_write){
+
+        $dbh = Connexion::getInstance()->getDb();
+
+        $query_insert = $dbh->prepare("INSERT INTO datas (chemin_relatif, mime_type, description, auteur_id) VALUES (?, ?, ?, ?)");
+        $result = $query_insert->execute(array($result_tab_write['chemin_relatif'], $result_tab_write['mime_type'], $result_tab_write['description'], $result_tab_write['auteur_id']));
+        
+        if (!$result) {
+            echo 'ERREUR VA ECOUTER DE L\'ASMR 5MIN';
+            return false;
+        } else {
+            echo 'SUCCESS';
+            return true;
+        }
+    }
+
+
+
+
+
+
+
 }

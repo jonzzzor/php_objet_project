@@ -83,9 +83,8 @@ if (isset($_GET['etape']) && $_GET['etape'] === '3') {
 
 
 
-        }
+        
         // foreach ($document as $key => $value) {
             
        // }
     }
-}
