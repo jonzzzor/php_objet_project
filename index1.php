@@ -58,11 +58,11 @@ if (isset($_GET['etape']) && $_GET['etape'] === '3') {
     $idData = '';
 
     //SI RESULTAT UNIQUE
-    if (count($array_response)==0 && count($_SESSION['resultatRecherche'])==1) {
+    if (count($array_response)==0 && count($_SESSION['resultatRecherche'] ?? array())==1) {
         $idData=$_SESSION['resultatRecherche'][0]['idData'];
     }
     //SI RESULTAT MULTIPLE
-    elseif (count($array_response)>0 && count($_SESSION['resultatRecherche'])>0) {
+    elseif (count($array_response)>0 && count($_SESSION['resultatRecherche'] ?? array())>0) {
         $idData = $array_response['idData'] ?? '';
     }
 

@@ -5,13 +5,13 @@ class ManagerFichier{
     public function write_data($file, $description, $user_id){
         
         $dest_dir = './application/multimedia';
-        $new_folder_extension = $this->check_type_extension($this->control_type_file($file));
+        $new_folder_extension = $this->getFolderName($this->getExtension($file['name']));
         if ($new_folder_extension == '') {
 
             echo '<em>IF du new_folder_extension = error</em><br/>';
             return false;
         }
-        $new_name= $new_folder_extension.microtime().'.'.$this->control_type_file($file);
+        $new_name= $new_folder_extension.microtime().'.'.$this->getExtension($file['name']);
         $new_name_nospace = preg_replace('/\s+/', '', $new_name);
         echo $new_name_nospace;
         $new_location = $dest_dir.'/'.$new_folder_extension.'/'.$new_name_nospace;
@@ -47,15 +47,15 @@ class ManagerFichier{
     }
 
     // Controle type de file
-    private function control_type_file($file)
+    private function getExtension($filename)
     {
-        if (preg_match('/(.+)\.(.+)$/i', $file['name'], $reg)) {
+        if (preg_match('/(.+)\.(.+)$/i', $filename, $reg)) {
             return strtolower($reg[2]);
         }
     }
 
     // Répartition type de fichier
-    private function check_type_extension($extension)
+    private function getFolderName($extension)
     {
         switch ($extension) {
             case 'webm': $rangement = 'video';

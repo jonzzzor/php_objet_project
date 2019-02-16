@@ -27,8 +27,12 @@ class Authentification
 
 
 
-    public function checkUser($user, $pass)
+    public function checkUser($user = '', $pass = '')
     {
+        
+        $user = htmlspecialchars($user);
+        $pass = htmlspecialchars($pass);
+        
         $db = Connexion::getInstance()->getDb();
         $query = $db->prepare("SELECT users.id FROM users WHERE users.nom=? AND users.passwd=?");
         // On vérifie le mot de passe ET le login.

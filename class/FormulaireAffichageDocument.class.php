@@ -46,7 +46,7 @@ class FormulaireAffichageDocument
         //Affichage de la description raccourcie + de ce qui permet de la déplier
         if (strlen($description)>=10) {
             echo "</div>
-            <div class='card-footer text-muted'>".self::shortenDescription($description)."</div></div></div></div>";
+            <div class='card-footer text-muted'>".$this->shortenDescription($description)."</div></div></div></div>";
         } else {
             echo "<div class='card-footer text-muted'>".$description."</div></div></div></div>";
         }

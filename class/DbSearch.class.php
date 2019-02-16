@@ -18,7 +18,7 @@ class DbSearch
         $imageSelected = htmlspecialchars($p_imageSelected);
 
 
-        //ON CREER LA PARTIE DE LA REQUETE COCNERNANT LA CHECKBOX
+        //ON CREER LA PARTIE DE LA REQUETE CONCERNANT LA CHECKBOX
         $request_checkbox = ' AND (';
         $isFirstSelected = true;
         if (isset($audioSelected) && $audioSelected === 'checked') {
@@ -75,10 +75,15 @@ class DbSearch
 
     function write_table($result_tab_write){
 
+        $chemin_relatif = htmlspecialchars($result_tab_write['chemin_relatif']); 
+        $mime_type = htmlspecialchars($result_tab_write['mime_type']); 
+        $description = htmlspecialchars($result_tab_write['description']);
+        $auteur_id = htmlspecialchars($result_tab_write['auteur_id']);
+            
         $dbh = Connexion::getInstance()->getDb();
 
         $query_insert = $dbh->prepare("INSERT INTO datas (chemin_relatif, mime_type, description, auteur_id) VALUES (?, ?, ?, ?)");
-        $result = $query_insert->execute(array($result_tab_write['chemin_relatif'], $result_tab_write['mime_type'], $result_tab_write['description'], $result_tab_write['auteur_id']));
+        $result = $query_insert->execute(array($chemin_relatif, $mime_type, $description, $auteur_id));
         
         if (!$result) {
             echo 'ERREUR VA ECOUTER DE L\'ASMR 5MIN';
