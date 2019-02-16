@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+
+<head>
+    <title>Mutimedia</title>
+    <!-- meta http-equiv="Content-Type" content="text/html; charset=utf-8"/ -->
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" media="all" href="./css/style.css" />
+
+</head>
+
+<body>
+
+    <!--HEADER-->
+    <header class="container-fluid" id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a href="#" target="blank">
+                        <div id="imgTop"> </div>
+                    </a>
+                    <h1>GENERATEUR MULTIMEDIA</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <div class='container navbar_perso'>
+        <nav class="navbar navbar-light bg-dark">
+
+            <form action="../php/analyse_form_connexion.php" class="form-inline ml-auto" method="POST">
+
+                <div class="input-group col-md-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Login</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="username" name="nom" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group col-md-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Password</span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="password" name="passwd" aria-describedby="basic-addon1">
+                </div>
+
+                <div class="col-md-4">
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                    <a href='../php/logout.php' class="btn btn-outline-danger">Sign out</a>
+                </div>
+            </form>
+        </nav>
+    </div>
