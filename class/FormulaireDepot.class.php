@@ -10,12 +10,20 @@ class FormulaireDepot
     public function showForm()
     {
         echo "
-        <form method='post' action='#' id='data_upload' enctype='multipart/form-data'><br/>
-            <input type='file' name='file_upload'/><br/>
-            <legend>Formats autorisés : .webm, .gif, .jpeg, .jpg, .png, .svg ou .ogg</legend><br/>
-            <input type='textarea' name='description' placeholder='Description'/><br/>
-            <button type='submit' name='send_file' value='click'>ENVOYER</button><br/>
-        </form>";
+        <div class='container'>
+            <form method='post' action='#' id='data_upload' enctype='multipart/form-data'><br/>
+                <div class='col-md-6-'>
+                    <div class='form-group'>
+                        <input type='file' name='file_upload' class='form-control-file'/><br/>
+                        <legend class='form-text text-muted'>Formats autorisés : .webm, .gif, .jpeg, .jpg, .png, .svg ou .ogg</legend><br/>
+                    </div>
+                    <div class='form-group'>
+                        <input type='textarea' name='description' placeholder='Description' class='form-control'/><br/>
+                    </div>
+                    <button type='submit' name='send_file' value='click' class='btn btn-primary'>ENVOYER</button><br/>
+                </div>
+            </form>
+        </div>";
 
     }
 
