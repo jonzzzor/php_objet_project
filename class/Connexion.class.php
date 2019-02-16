@@ -5,7 +5,7 @@ class Connexion
     private $host = 'localhost';
     private $dbname = 'site_multimedia';
     private $user = 'root';
-    private $mdp = 'root';
+    private $mdp = '1234512345';
     private static $instance_db;
     private $dbh;
 
