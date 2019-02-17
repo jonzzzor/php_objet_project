@@ -1,0 +1,44 @@
+/*IMPORTS FONTS*/
+@import url('https://fonts.googleapis.com/css?family=Nova+Flat');
+
+
+/*HEADER*/
+ 
+
+#imgTop {
+    margin: 15px 0 0 0;
+    padding: 50% 0 0 0;
+    height:120px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url("../img/eye.jpg");
+}
+
+h1{
+    font-family: 'Nova Flat', cursive;
+}
+h1::first-letter{
+    font-size : 200%;
+    color: rgb(200,20,20);
+}
+
+/*NAVBAR*/
+
+.navbar_perso{
+    margin-bottom : 30px;
+}
+
+.text_welcome_user{
+    color: white;
+}
+
+
+
+/*FORMULAIRES */
+
+
+.title_formulaire{
+    color: black;
+    font-weight: bold;
+    
+}
