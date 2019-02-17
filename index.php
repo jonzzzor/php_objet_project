@@ -1,5 +1,4 @@
 <?php
-
 try {
     spl_autoload_register(function ($class_name) {
         $path_class = './class/'.$class_name.'.class.php';
