@@ -15,12 +15,11 @@ class FormulaireRechercheRadioButton
 
         echo "<div class='container'>
                   <!-- Informations entrantes-->
-                      <div class='col-md-auto'>
-
-                         <p class='title_formulaire'> Veuillez séletionnez un résultat :</p>
-                          <div class='form-group'>
-                              <fieldset class='form-group'><form method='get' action='#'>
-                                    <input class='form-control' id='form_multimedia' type='hidden' name='etape' value='3'>";
+                      <div class='offset-3 col-md-6'>
+                          <div class='alert alert-info' role='alert'>Veuillez sélectionner un résultat :</div>
+                              <div class='form-group'>
+                                  <fieldset class='form-group'><form method='get' action='#'>
+                                        <input class='form-control' id='form_multimedia' type='hidden' name='etape' value='3'>";
 
         for ($i=0; $i<$countResult; $i++) {
             $tempArray = $resultRecherche[$i];
@@ -29,11 +28,14 @@ class FormulaireRechercheRadioButton
             $tempIdData = $tempArray['idData'];
             $tempTypeMime = $tempArray['mime_type'];
 
-            echo "
-                                        <div>
-                                            <input class='form-control' type='radio' id='radioresult'.$i name='idData' value=$tempIdData>
-                                            <label for='radioresult'>[Auteur : $tempNomAuteur] / [Description : $tempDescription] / [Type : $tempTypeMime]</label>
-                                        </div>";
+            echo "  <div class='input-group mb-3'>
+                        <div class='input-group-prepend'>
+                            <div class='input-group-text'>
+                            <input type='radio' id='radioresult'.$i name='idData' value=$tempIdData>
+                            </div>
+                            <label for='radioresult' class='input-group-text'><span><em>$tempTypeMime</em> (<strong>$tempNomAuteur</strong>) : <em>$tempDescription</em><span></label>
+                        </div>
+                    </div>";
         }
         echo "
                                     <div>
@@ -55,5 +57,3 @@ class FormulaireRechercheRadioButton
         return $array;
     }
 }
-
-//Session::killInstance();

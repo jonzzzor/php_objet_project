@@ -11,7 +11,6 @@ class Connexion
 
     private function __construct()
     {
-        // echo '<br/>from constructeur : connexion à la base de donnée.<br/>';
     }
 
     public static function getInstance()
@@ -20,15 +19,18 @@ class Connexion
             self::$instance_db = new self();
             self::$instance_db->connectToDb();
         }
-        // echo '<br/>from getInstance : instanciation lancée.';
         return self::$instance_db;
     }
 
     private function connectToDb()
     {
-        $this->dbh = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname, $this->user, $this->mdp); // connexion
+        try {
+            $this->dbh = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname, $this->user, $this->mdp); // connexion
         $this->dbh->exec("SET NAMES 'UTF-8MB4'");      // config du charset
         return $this->dbh;
+        } catch (Exception $e) {
+            throw new Exception("Impossible de se connecter à la base de donnée.");
+        }
     }
 
     public function getDb()
@@ -36,5 +38,3 @@ class Connexion
         return $this->dbh;
     }
 }
-
-// var_dump(Connexion::getInstance()->getDb());

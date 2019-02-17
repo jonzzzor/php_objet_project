@@ -9,8 +9,6 @@ class FormulaireAffichageDocument
 
     public function showForm($array_document)
     {
-        //echo '<pre>'; print_r($document); echo '</pre>';
-
         $mime_type=$array_document['mime_type'] ?? '';
         $chemin_relatif = $array_document['chemin_relatif'] ?? '';
         $description= $array_document['description'] ?? '';
@@ -19,7 +17,8 @@ class FormulaireAffichageDocument
         preg_match('/(.+)\/(.+)$/i', $mime_type, $reg);
         $documentLocation = './application/multimedia/'.$reg[1].'/'.$chemin_relatif;
 
-        echo "<div class='card text-center'>
+        echo "<div class='container'>
+                <div class='card text-center'>
                   <div class='card-header'>
                       $name[1]
                         </div>
@@ -30,16 +29,20 @@ class FormulaireAffichageDocument
                 case 'image': echo "<img src='$documentLocation' alt='Image sélectionnée' />";
                 break;
                 case 'audio': echo "<audio controls='controls'>
-                        <source src=$documentLocation type=$mime_type />
-                        Votre navigateur ne supporte pas le lecteur audio.
-                      </audio>";
+                                    <source src=$documentLocation type=$mime_type />
+                                    <div class='container'>
+                                        <div class='alert alert-warning' role='alert'>Votre navigateur ne supporte pas le lecteur audio.</div>
+                                    </div>
+                                    </audio>";
                 break;
                 case 'video': echo "<video controls width='1000'>
-                        <source src=$documentLocation type=$mime_type>
-                        Votre navigateur ne supporte pas le lecteur vidéo.
-                    </video>";
+                                    <source src=$documentLocation type=$mime_type />
+                                    <div class='container'>
+                                        <div class='alert alert-warning' role='alert'>Votre navigateur ne supporte pas le lecteur vidéo.</div>
+                                    </div>
+                                    </video>";
                 break;
-                default: echo 'erreur format inconnu';
+                default:   throw new Exception("Le format de fichier n'est pas reconnu.");
         }
 
 
@@ -48,7 +51,7 @@ class FormulaireAffichageDocument
             echo "</div>
             <div class='card-footer text-muted'>".$this->shortenDescription($description)."</div></div></div></div>";
         } else {
-            echo "<div class='card-footer text-muted'>".$description."</div></div></div></div>";
+            echo "<div class='card-footer text-muted'>".$description."</div></div></div></div></div>";
         }
     }
 
@@ -62,7 +65,3 @@ class FormulaireAffichageDocument
         return $description;
     }
 }
-
-
-
-//Session::killInstance();

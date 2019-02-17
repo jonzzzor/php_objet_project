@@ -3,6 +3,7 @@
 class Authentification
 {
     private static $instance;
+    private $grainDeSel = 'alloallo';
 
     private function __construct()
     {
@@ -24,15 +25,18 @@ class Authentification
         return self::$instance;
     }
 
-
-
+    public function hashing($string_pwd)
+    {
+        $passwd_clr = htmlspecialchars($string_pwd);
+        $passHashed = md5($passwd_clr.$this->grainDeSel);
+        return $passHashed;
+    }
 
     public function checkUser($user = '', $pass = '')
     {
-        
         $user = htmlspecialchars($user);
         $pass = htmlspecialchars($pass);
-        
+
         $db = Connexion::getInstance()->getDb();
         $query = $db->prepare("SELECT users.id FROM users WHERE users.nom=? AND users.passwd=?");
         // On vérifie le mot de passe ET le login.

@@ -12,14 +12,9 @@ class ManagerFichier
         }
         $new_name= $new_folder_extension.microtime().'.'.$this->getExtension($file['name']);
         $new_name_nospace = preg_replace('/\s+/', '', $new_name);
-        echo $new_name_nospace;
         $new_location = $dest_dir.'/'.$new_folder_extension.'/'.$new_name_nospace;
         if (isset($file['error']) && UPLOAD_ERR_OK === $file['error']) {
-            echo $file['tmp_name']."<br/>";
-            echo $new_location."<br/>";
             if (@move_uploaded_file($file['tmp_name'], $new_location)) {
-                printf("<h2>transfert de <samp>%s</samp> réalisé</h2>\n", $new_name_nospace);
-                printf("<p>le lien suivant <a href=\"%s\">%s</a> donne accès au fichier transféré</p>\n", $new_location, $new_location);
                 $tab_assoc = array();
                 $tab_assoc['chemin_relatif'] = $new_name_nospace;
                 $tab_assoc['mime_type'] = $file['type'];
@@ -70,7 +65,7 @@ class ManagerFichier
             break;
             default: $rangement = '';
         }
-        // echo "RANGEMENT FILE DANS : $rangement<br/>";
+  
         return $rangement;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class DbSearch
+class DbRequest
 {
     public function __construct()
     {
@@ -73,31 +73,24 @@ class DbSearch
         return $resultArray;
     }
 
-    function write_table($result_tab_write){
-
-        $chemin_relatif = htmlspecialchars($result_tab_write['chemin_relatif']); 
-        $mime_type = htmlspecialchars($result_tab_write['mime_type']); 
+    public function write_table($result_tab_write)
+    {
+        $chemin_relatif = htmlspecialchars($result_tab_write['chemin_relatif']);
+        $mime_type = htmlspecialchars($result_tab_write['mime_type']);
         $description = htmlspecialchars($result_tab_write['description']);
         $auteur_id = htmlspecialchars($result_tab_write['auteur_id']);
-            
+
         $dbh = Connexion::getInstance()->getDb();
 
         $query_insert = $dbh->prepare("INSERT INTO datas (chemin_relatif, mime_type, description, auteur_id) VALUES (?, ?, ?, ?)");
         $result = $query_insert->execute(array($chemin_relatif, $mime_type, $description, $auteur_id));
-        
+
         if (!$result) {
-            echo 'ERREUR VA ECOUTER DE L\'ASMR 5MIN';
+            throw new Exception("L'insertion dans la table a échoué.");
             return false;
         } else {
-            echo 'SUCCESS';
+            echo '<div class="container"><div class="alert alert-success" role="alert">Fichier ajouté avec succès !</div></div>';
             return true;
         }
     }
-
-
-
-
-
-
-
 }

@@ -71,7 +71,13 @@ class Vue
                 // echo "Bienvenue ". SESSION::getInstance()->getUserNom()." <br/>";
                 // echo "Vous êtes connecté ! <br/>";
             } else {
-                echo "login/mdp invalide <br/>";
+                echo "<div class='container'>
+                        <div class='row justify-content-center'>
+                            <div class='col-md-4'>
+                                <p class='alert alert-warning text-center'>Login ou Mot de passe invalide </p>
+                            </div>
+                        </div>
+                      </div><br/>";
             }
         }
         //SINON SI DEMANDE DE DECONNEXION
@@ -111,6 +117,7 @@ class Vue
         //on crée l'instance
         $form_recherche_radioButton = new FormulaireRechercheRadioButton();
         //si formulaire déja rempli, on recuprere les info du derniers formulaire
+
         $array_response = $form_recherche_radioButton->getResponse();
         $idData = '';
 
@@ -133,7 +140,7 @@ class Vue
                 }
             }
         } else {
-            echo "Le document n'existe pas";
+            throw new Exception("Impossible d'afficher le document.");
         }
     }
 
@@ -147,36 +154,23 @@ class Vue
         //AFFICHAGE DU FORMULAIRE DE DEPOT
         //on crée l'instance
         $form_depot = new FormulaireDepot();
-        //si formulaire déja rempli, on recupèere les infos du dernier formulaire
-        $array_depot = $form_depot->getResponse();
+
         //on affiche le formulaire
-        //
         $form_depot->showForm();
-        if ($array_depot) {
-            $file = $array_depot['file_upload'];
-            $description = $array_depot['description'];
-            $user_id = 1; // A RECUP DANS FORM JONHATHAN
-            $manager_fichier = new ManagerFichier();
-            $recup_adress = $manager_fichier->write_data($file, $description, $user_id);
-            $manager_db = new DbSearch();
-            $manager_db->write_table($recup_adress);
-        }
     }
 
     public function showFooter()
     {
         $footer = "<!-- FOOTER START-->
-      <footer class='text-center'>
-          <div class='container'>
-              <hr>
-              <p>Adeline, Christophe, Jonathan et Thierry</p>
-          </div>
-      </footer>
-      <!-- FOOTER END-->
-
-      </body>
-
-      </html>";
+                  <footer class='text-center'>
+                      <div class='container'>
+                          <hr>
+                          <p>Adeline, Christophe, Jonathan et Thierry</p>
+                      </div>
+                  </footer>
+                  <!-- FOOTER END-->
+                  </body>
+                  </html>";
         printf("%s", $footer);
     }
 }

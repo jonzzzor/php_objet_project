@@ -24,7 +24,7 @@ class FormulaireRecherche
         echo "
         <div class='container'>
             <!-- Informations sortantes-->
-                <div class='col-md-6'>
+                <div class='offset-3 col-md-6'>
                     <div class='form-group'>
                         <fieldset>
                             <form method='get' action='#'>
@@ -34,17 +34,38 @@ class FormulaireRecherche
                               <label for='form_autor'>Auteur</label>
                               <input class='form-control' type='text' id='form_autor' name='form_autor' value=$this->autor><br>
 
-                              <label for='form_srch_audio'>Audio</label>
-                              <input class='form-control' id='form_srch_audio' type='checkbox' name='audio_checkbox' value='checked' $this->audioSelected>
-                              <label for='form_srch_img'>Image</label>
-                              <input class='form-control' id='form_srch_img' type='checkbox' name='image_checkbox' value='checked' $this->imageSelected>
-                              <label for='form_srch_video'>Video</label>
-                              <input class='form-control' id='form_srch_video' type='checkbox' name='video_checkbox' value='checked' $this->videoSelected>
+                              <div class='input-group mb-3'>
+                                <div class='input-group-prepend'>
+                                  <div class='input-group-text'>
+                                    <input name='audio_checkbox' type='checkbox' value='checked' id='customCheck1' $this->audioSelected>
+                                  </div>
+                                </div>
+                                <label class='input-group-text' for='customCheck1'>Audio</label>
+                              </div>
+
+                              <div class='input-group mb-3'>
+                                <div class='input-group-prepend'>
+                                  <div class='input-group-text'>
+                                    <input name='image_checkbox' type='checkbox' value='checked' id='customCheck1' $this->imageSelected>
+                                  </div>
+                                </div>
+                                <label class='input-group-text' for='customCheck1'>Image</label>
+                              </div>
+
+                              <div class='input-group mb-3'>
+                                <div class='input-group-prepend'>
+                                  <div class='input-group-text'>
+                                    <input name='video_checkbox' type='checkbox' value='checked' id='customCheck1' $this->videoSelected>
+                                  </div>
+                                </div>
+                                <label class='input-group-text' for='customCheck1'>Video</label>
+                              </div>
+
 
                               <label for='form_desc'>Description</label>
                               <input class='form-control' type='text' id='form_desc' name='form_desc' maxlength='50' value=$this->desc><br>
 
-                              <input class='form-control' type='submit' value='Rechercher'>
+                              <input class='form-control btn btn-dark' type='submit' value='Rechercher'>
 
                             </form>
                         </fieldset>
@@ -72,7 +93,3 @@ class FormulaireRecherche
         return $array;
     }
 }
-
-
-
-//Session::killInstance();
