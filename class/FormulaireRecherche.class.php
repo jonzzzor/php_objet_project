@@ -36,7 +36,7 @@ class FormulaireRecherche
 
                               <input type='checkbox' name='audio_checkbox' value='checked' $this->audioSelected>Audio<br>
                               <input type='checkbox' name='image_checkbox' value='checked' $this->imageSelected>Image<br>
-                              <input type='checkbox' name='video_checkbox' value='checked' $this->videoSelected>Video<br>
+                              <input type='checkbox' name='video_checkbox' value='checked' $this->videoSelected>Vidéo<br>
 
                               <label for='form_desc'>Description</label>
                               <input type='text' id='form_desc' name='form_desc' maxlength='50' value=$this->desc><br>

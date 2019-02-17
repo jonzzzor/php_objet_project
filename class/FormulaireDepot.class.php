@@ -15,7 +15,7 @@ class FormulaireDepot
                 <div class='col-md-6-'>
                     <div class='form-group'>
                         <input type='file' name='file_upload' class='form-control-file'/><br/>
-                        <legend class='form-text text-muted'>Formats autorisés : .webm, .gif, .jpeg, .jpg, .png, .svg ou .ogg</legend><br/>
+                        <!--legend--> class='form-text text-muted'>Formats autorisés : .webm, .gif, .jpeg, .jpg, .png, .svg ou .ogg<!--/legend--><br/>
                     </div>
                     <div class='form-group'>
                         <input type='textarea' name='description' placeholder='Description' class='form-control'/><br/>

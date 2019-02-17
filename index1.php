@@ -58,15 +58,15 @@ $form_auth->showForm();
 
 
 //AFFICHAGE DU FORMULAIRE DE RECHERCHE
-//on creer l'instance
+//on crée l'instance
 $form_recherche = new FormulaireRecherche();
-//si formualire déja rempli, on recuprere les info du derniers formulaire
+//si formulaire déja rempli, on recupèere les infos du dernier formulaire
 $array_response = $form_recherche->getResponse();
 //on affiche le formulaire
 $form_recherche->showForm();
 
 
-//AFFICHAGE DU FORMULAIRE DE BUOUTON RADIO
+//AFFICHAGE DU FORMULAIRE DE BOUTON RADIO
 if (isset($_GET['etape']) && $_GET['etape'] === '2') {
     $databaseRequest= new DbSearch();
     $resultRecherche = $databaseRequest->rechercheDocument($array_response['form_autor'], $array_response['form_desc'],
@@ -89,7 +89,7 @@ if (isset($_GET['etape']) && $_GET['etape'] === '2') {
         $form_recherche_radioButton = new FormulaireRechercheRadioButton();
         $form_recherche_radioButton->showForm($resultRecherche);
     } else {
-        echo "<p>aucun resultat</p>";
+        echo "<p>Aucun résultat</p>";
     }
 }
 
@@ -103,9 +103,9 @@ if (isset($_GET['etape']) && $_GET['etape'] === '3') {
     etape3:
 
 
-    //on creer l'instance
+    //on crée l'instance
     $form_recherche_radioButton = new FormulaireRechercheRadioButton();
-    //si formualire déja rempli, on recuprere les info du derniers formulaire
+    //si formulaire déja rempli, on recuprere les info du derniers formulaire
     $array_response = $form_recherche_radioButton->getResponse();
 
 
