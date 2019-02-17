@@ -3,6 +3,7 @@
 
 
 /*HEADER*/
+ 
 
 #imgTop {
     margin: 15px 0 0 0;
@@ -25,4 +26,19 @@ h1::first-letter{
 
 .navbar_perso{
     margin-bottom : 30px;
+}
+
+.text_welcome_user{
+    color: white;
+}
+
+
+
+/*FORMULAIRES */
+
+
+.title_formulaire{
+    color: black;
+    font-weight: bold;
+    
 }

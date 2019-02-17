@@ -14,21 +14,35 @@ class Session
         $this->user_passwd = $user_passwd;
     }
 
-    private function __destruct()
+    public function __destruct()
     {
         // echo "<p>destruction de l'instance de Session".$this->user_nom."</p>\n";
     }
 
     public static function getInstance($user_id = 'defaut_id', $user_nom = 'defaut_nom', $user_passwd = 'defaut_passwd')
     {
-        if (!self::$instance) {
+        //ON RECUPERE LA SESSION SI ELLE EXISTE
+        if(!self::$instance && isset($_SESSION["SessionUser"]) && $_SESSION["SessionUser"] instanceof SESSION){
+            $session = $_SESSION["SessionUser"];
+            self::$instance = $session;//new self($session->getUserId(), $session->getUserNom, $session->getUserPasswd());
+        }else 
+        if (!self::$instance) { 
             self::$instance = new self($user_id, $user_nom, $user_passwd);
-        }
-        // echo "<p>appel de l'instance de Sessio ".self::$instance->user_nom." / ".self::$instance->user_passwd."</p>\n";
-
+            $_SESSION["SessionUser"] = self::$instance;
+        } 
+        
         return self::$instance;
     }
 
+    static public function setInstance($objet)
+    {
+        if($objet instanceof self)
+        {
+            self::$instance = $objet;
+            return true;
+        }
+        return false;
+    }
     public function getUserId()
     {
         return $this->user_id;
@@ -43,9 +57,10 @@ class Session
     {
         return $this->user_passwd;
     }
-
+    
     public static function killInstance()
     {
+        $_SESSION["SessionUser"] = "";
         self::$instance = null;
     }
 }

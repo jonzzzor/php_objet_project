@@ -9,44 +9,61 @@ class FormulaireAuthentification
 
     public function showForm()
     {
-        echo "
-        <div class='container navbar_perso'>
-        <nav class='navbar navbar-light bg-dark'>
+        $button_connect_disconnect ="";
+        if (Authentification::getInstance()->isAuth()) { 
 
-            <form action='#' class='form-inline ml-auto' method='POST'>
-
-                <div class='input-group col-md-4'>
-                    <div class='input-group-prepend'>
-                        <span class='input-group-text' id='basic-addon1'>Login</span>
+            //echo "<p>Bienvenue ". SESSION::getInstance()->getUserNom()."</p>"; 
+            echo " 
+            <div class='container navbar_perso'>
+                <nav class='navbar navbar-light bg-dark'>
+                    <p class='text_welcome_user'>Bienvenue ". SESSION::getInstance()->getUserNom()."</p>
+                    <form action='#' class='form-inline ml-auto' method='POST'>
+                        <div class='col-md-4'>
+                            <input type='hidden' name='session_destroy' value='1'>
+                            <input class='btn btn-primary' type='submit' value='Se déconnecter'> 
+                        </div>
+                    </form>
+                </nav>
+            </div>
+        ";
+        }
+        else {  
+            echo "
+            <div class='container navbar_perso'>
+            <nav class='navbar navbar-light bg-dark'>
+    
+                <form action='#' class='form-inline ml-auto' method='POST'>
+    
+                    <div class='input-group col-md-4'> 
+                        <input type='text' class='form-control' placeholder='Login' name='nom' aria-describedby='basic-addon1' required>
                     </div>
-                    <input type='text' class='form-control' placeholder='username' name='nom' aria-describedby='basic-addon1'>
-                </div>
-                <div class='input-group col-md-4'>
-                    <div class='input-group-prepend'>
-                        <span class='input-group-text' id='basic-addon1'>Password</span>
+                    <div class='input-group col-md-4'> 
+                        <input type='password' class='form-control' name='passwd' placeholder='Password' aria-describedby='basic-addon1'  required>
                     </div>
-                    <input type='password' class='form-control' name='passwd' aria-describedby='basic-addon1'>
-                </div>
+    
+                    <div class='col-md-4'>
+                        <input class='btn btn-primary' type='submit' value='Se connecter'> 
+                    </div>
+                </form>
+            </nav>
+        </div>";
+        }
 
-                <div class='col-md-4'>
-                    <input class='btn btn-primary' type='submit' value='Submit'>
-                    <a href='' class='btn btn-outline-danger'>Sign out</a>
-                </div>
-            </form>
-        </nav>
-    </div>";
+       
 
     }
 
     public function getResponse()
     {
-        $array = array();
-        $user = $_POST['nom'];
-        $passwd = $_POST['passwd'];
+        $array = array(); 
 
-        if (isset($user) && isset($passwd)) {
-            $array['user'] = $user;
-            $array['passwd'] = $passwd;
+        if (isset($_POST['passwd']) && isset($_POST['nom'])) {
+            $array['user'] = $_POST['nom'];
+            $array['passwd'] = $_POST['passwd'];
+            return $array;
+        }
+        else if(isset($_POST['session_destroy'])){
+            $array['session_destroy'] = $_POST['session_destroy'];
             return $array;
         }
         else {

@@ -9,7 +9,7 @@ class Authentification
         // echo "<p>création de l'instance d'authentification </p>\n";
     }
 
-    private function __destruct()
+    public function __destruct()
     {
         // echo "<p>destruction de l'instance d'authentification</p>\n";
     }
@@ -41,6 +41,7 @@ class Authentification
         $result_query = $query->fetch(PDO::FETCH_ASSOC);
         // var_dump($result_query);
         if (isset($result_query['id'])) {
+            $this->disconnect();
             Session::getInstance($result_query['id'], $user, $pass);
             return true;
         } else {
@@ -59,7 +60,7 @@ class Authentification
 
     public function disconnect()
     {
-        Session::killInstance();
+        Session::getInstance()->killInstance();
     }
 
 

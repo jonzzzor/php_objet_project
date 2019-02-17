@@ -20,6 +20,3 @@ if($array_infos){
     $manager_db->write_table($recup_adress);
 }
 
-
-
-

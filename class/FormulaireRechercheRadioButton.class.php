@@ -16,6 +16,8 @@ class FormulaireRechercheRadioButton
         echo "<div class='container'>
                   <!-- Informations entrantes-->
                       <div class='col-md-auto'>
+
+                         <p class='title_formulaire'> Veuillez séletionnez un résultat :</p>
                           <div class='form-group'>
                               <fieldset><form method='get' action='#'>
                                     <input type='hidden' name='etape' value='3'>";
