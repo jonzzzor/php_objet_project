@@ -29,19 +29,22 @@ class FormulaireRecherche
                         <fieldset>
                             <form method='get' action='#'>
 
-                              <input type='hidden' name='etape' value='2'>
+                              <input class='form-control' type='hidden' name='etape' value='2'>
 
                               <label for='form_autor'>Auteur</label>
-                              <input type='text' id='form_autor' name='form_autor' value=$this->autor><br>
+                              <input class='form-control' type='text' id='form_autor' name='form_autor' value=$this->autor><br>
 
-                              <input type='checkbox' name='audio_checkbox' value='checked' $this->audioSelected>Audio<br>
-                              <input type='checkbox' name='image_checkbox' value='checked' $this->imageSelected>Image<br>
-                              <input type='checkbox' name='video_checkbox' value='checked' $this->videoSelected>Vidéo<br>
+                              <label for='form_srch_audio'>Audio</label>
+                              <input class='form-control' id='form_srch_audio' type='checkbox' name='audio_checkbox' value='checked' $this->audioSelected>
+                              <label for='form_srch_img'>Image</label>
+                              <input class='form-control' id='form_srch_img' type='checkbox' name='image_checkbox' value='checked' $this->imageSelected>
+                              <label for='form_srch_video'>Video</label>
+                              <input class='form-control' id='form_srch_video' type='checkbox' name='video_checkbox' value='checked' $this->videoSelected>
 
                               <label for='form_desc'>Description</label>
-                              <input type='text' id='form_desc' name='form_desc' maxlength='50' value=$this->desc><br>
+                              <input class='form-control' type='text' id='form_desc' name='form_desc' maxlength='50' value=$this->desc><br>
 
-                              <input type='submit' value='Rechercher'>
+                              <input class='form-control' type='submit' value='Rechercher'>
 
                             </form>
                         </fieldset>

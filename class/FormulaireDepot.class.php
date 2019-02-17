@@ -1,19 +1,20 @@
 <?php
- 
+
 class FormulaireDepot
 {
- 
-  public function __construct() {
-  }
+    public function __construct()
+    {
+    }
 
 
     public function showForm()
     {
         echo "
         <div class='container'>
-            <form method='post' action='#' id='data_upload' enctype='multipart/form-data'><br/>
+            <fieldset class='form-group'>
                 <div class='col-md-6-'>
                     <div class='form-group'>
+                    <form method='post' action='#' id='data_upload' enctype='multipart/form-data'><br/>
                         <input type='file' name='file_upload' class='form-control-file'/><br/>
                         <legend class='form-text text-muted'>Formats autorisés : .webm, .gif, .jpeg, .jpg, .png, .svg ou .ogg</legend><br/>
                     </div>
@@ -21,10 +22,10 @@ class FormulaireDepot
                         <input type='textarea' name='description' placeholder='Description' class='form-control'/><br/>
                     </div>
                     <button type='submit' name='send_file' value='click' class='btn btn-primary'>ENVOYER</button><br/>
+                    </form>
                 </div>
-            </form>
+            </fieldset>
         </div>";
-
     }
 
     public function getResponse()
@@ -33,28 +34,27 @@ class FormulaireDepot
         //send_file = name du bouton submit du formulaire de dépôt ; 'click' = value de ce bouton
         $send_file = htmlspecialchars($_POST['send_file'] ?? '');
         if ($send_file == 'click') {
-            if(isset($_FILES['file_upload']) && $_FILES['file_upload']['name'] != ''){
+            if (isset($_FILES['file_upload']) && $_FILES['file_upload']['name'] != '') {
                 $array['file_upload'] = $_FILES['file_upload'];
-            }else{
+            } else {
                 echo "FICHIER MANQUANT<br/>";
                 return false;
             }
-            if(isset($_POST['description']) && $_POST['description'] != ''){
+            if (isset($_POST['description']) && $_POST['description'] != '') {
                 $array['description'] = htmlspecialchars($_POST['description'] ?? '');
-            }else{
+            } else {
                 echo "DESCRIPTION MANQUANTE<br/>";
-                
             }
         }
         return $array;
     }
 
-    
+
 
     // Contrôle type de file
     private function control_type_file($file)
     {
-         if (preg_match('/(.+)\.(.+)$/i', $file['name'], $reg)) {
+        if (preg_match('/(.+)\.(.+)$/i', $file['name'], $reg)) {
             // var_dump($reg);
             // echo("EXTENSION FICHIER : $reg[2]<br/>");
             return strtolower($reg[2]);
@@ -80,11 +80,8 @@ class FormulaireDepot
         // echo "RANGEMENT FILE DANS : $rangement<br/>";
         return $rangement;
     }
-    
-     
-
 }
 
 
- 
+
 //Session::killInstance();
