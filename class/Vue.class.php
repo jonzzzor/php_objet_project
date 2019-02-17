@@ -139,6 +139,7 @@ class Vue
 
     public function showFormDepot()
     {
+
         /*********************************/
         /*      FORMULAIRE DEPOT     */
         /*********************************/
@@ -149,6 +150,7 @@ class Vue
         //si formulaire déja rempli, on recupèere les infos du dernier formulaire
         $array_depot = $form_depot->getResponse();
         //on affiche le formulaire
+        //
         $form_depot->showForm();
         if ($array_depot) {
             $file = $array_depot['file_upload'];

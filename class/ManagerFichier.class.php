@@ -1,14 +1,13 @@
 <?php
 
-class ManagerFichier{
-
-    public function write_data($file, $description, $user_id){
-        
+class ManagerFichier
+{
+    public function write_data($file, $description, $user_id)
+    {
         $dest_dir = './application/multimedia';
         $new_folder_extension = $this->getFolderName($this->getExtension($file['name']));
         if ($new_folder_extension == '') {
-
-            echo '<em>IF du new_folder_extension = error</em><br/>';
+            throw new Exception('Type de fichier incorrect.');
             return false;
         }
         $new_name= $new_folder_extension.microtime().'.'.$this->getExtension($file['name']);
@@ -28,20 +27,21 @@ class ManagerFichier{
                 $tab_assoc['auteur_id'] = $user_id;
                 return $tab_assoc;
             } else {
-                $message = sprintf(
-                            "Une erreur interne est survenue lors de la récupération du fichier <samp>%s</samp> (<em>%s</em>).<br/>".
-                            "<p>message : <code>%s</code><br/>",
-                            $file['tmp_name'],
-                            $new_name,
-                            join("<br/>\n", error_get_last())
-                            );
-                echo $message;           
+                throw new Exception("Erreur lors de l'écriture du fichier, vérifiez les droits d'accès.");
+                // $message = sprintf(
+                //             "Une erreur interne est survenue lors de la récupération du fichier <samp>%s</samp> (<em>%s</em>).<br/>".
+                //             "<p>message : <code>%s</code><br/>",
+                //             $file['tmp_name'],
+                //             $new_name,
+                //             join("<br/>\n", error_get_last())
+                //             );
+                // echo $message;
                 return false;
             }
         } else {
-            $message = 'Une erreur interne a empêché l\'upload de l\'image : '. $file['error'];
-            printf('message : %s', $message);
-            
+            throw new Exception("Erreur survenue lors de la récupération du fichier.");
+            // $message = 'Une erreur interne a empêché l\'upload de l\'image : '. $file['error'];
+            // printf('message : %s', $message);
             return false;
         }
     }
