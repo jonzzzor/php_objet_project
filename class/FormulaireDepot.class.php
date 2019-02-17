@@ -30,6 +30,7 @@ class FormulaireDepot
     public function getResponse()
     {
         $array = array();
+        //send_file = name du bouton submit du formulaire de dépôt ; 'click' = value de ce bouton
         $send_file = htmlspecialchars($_POST['send_file'] ?? '');
         if ($send_file == 'click') {
             if(isset($_FILES['file_upload']) && $_FILES['file_upload']['name'] != ''){
