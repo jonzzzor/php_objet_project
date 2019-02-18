@@ -26,7 +26,7 @@ class FormulaireAffichageDocument
 
         //echo '<pre>'; print_r($reg); echo '</pre>';
         switch ($reg[1]) {
-                case 'image': echo "<img src='$documentLocation' alt='Image sélectionnée' />";
+                case 'image': echo "<img class='img-fluid' src='$documentLocation'>";
                 break;
                 case 'audio': echo "<audio controls='controls'>
                                     <source src=$documentLocation type=$mime_type />
